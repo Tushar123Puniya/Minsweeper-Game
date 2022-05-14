@@ -1,0 +1,99 @@
+#  By Tushar Puniya
+
+import random as r
+
+def printboard(l):                              #  Function to print the board
+    k=0
+    print('       ',end='')
+    while k<9:
+        print(k,end='    ')
+        k=k+1
+    print('\n',end='')
+    k=0
+    while k<9:
+        print(k,'  ',l[k])
+        k=k+1
+
+def modifysl(r,c):                                # Function to modify continouslly sl list
+    sl[r][c]=rl[r][c]
+
+sl=[]                                             #Intisialize board as sl list
+for x in range(0,9):
+    sl.append(['-','-','-','-','-','-','-','-','-'])
+
+rl=[]                                             #Intisialize board on which permanent locations and numbers are marked as rl list
+for x in range(0,10):
+    rl.append([0,0,0,0,0,0,0,0,0])
+
+l=r.sample(range(9,82),10)                    # randomly choosing 10 locations where mines will be placed
+for x in l:
+    rl[int(x/9)-1][x%9]=9
+
+i=0                                              # marking numbers to position which are near to mines for hints
+while i<9:
+    j=0
+    while j<9:
+        if rl[i][j]>=9:
+            if i>0:
+                rl[i-1][j]=rl[i-1][j]+1
+            if i<8:
+                rl[i+1][j]=rl[i+1][j]+1
+            if j>0:
+                rl[i][j-1]=rl[i][j-1]+1
+            if j<8:
+                rl[i][j+1]=rl[i][j+1]+1
+            if i>0 and j>0:
+                rl[i-1][j-1]=rl[i-1][j-1]+1
+            if i>0 and j<8:
+                rl[i-1][j+1]=rl[i-1][j+1]+1
+            if i<8 and j>0:
+                rl[i+1][j-1]=rl[i+1][j-1]+1
+            if i<8 and j<8:
+                rl[i+1][j+1]=rl[i+1][j+1]+1
+        j=j+1
+    i=i+1
+
+i=0                                                         # this will modify all values greater than
+while i<9:
+    j=0
+    while j<9:
+        if rl[i][j]>=9:
+            rl[i][j]='M'
+        else:
+            rl[i][j]=str(rl[i][j])
+        j=j+1
+    i=i+1
+
+# Main working starts
+
+print('''                                    MINES SWEEPER GAME                                        ''')
+print('''
+RULES:
+   Choose randomly a position and if it would not be mine (as if you were lucky enough) you get a number, this number
+   would tell number of mines presents in it's nearest eight neighbours ( absolutely if exists) and in this way using 
+   your luck and mind try to dig up all places of mines and win otherwise on basis of chances you played you will get 
+   your score.
+   So  now  what are you waiting for  start playing .
+''')
+printboard(sl)
+cnt=0
+
+# while 1:
+#     r=int(input("Enter first index: "))
+#     c=int(input("Enter second index: "))
+#     print('\n')
+#     cnt=cnt+1
+#     modifysl(r,c)
+#     printboard(sl)
+#     if sl[r][c]=='M':
+#         print("Your Points = ",cnt)
+#         print('You Lose, Better luck next time')
+#         break
+#     if cnt==70:
+#         print("Yours Points = ",cnt)
+#         print('You Win, Great Play')
+#         break
+printboard(rl)
+
+
+
