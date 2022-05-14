@@ -78,22 +78,21 @@ RULES:
 printboard(sl)
 cnt=0
 
-# while 1:
-#     r=int(input("Enter first index: "))
-#     c=int(input("Enter second index: "))
-#     print('\n')
-#     cnt=cnt+1
-#     modifysl(r,c)
-#     printboard(sl)
-#     if sl[r][c]=='M':
-#         print("Your Points = ",cnt)
-#         print('You Lose, Better luck next time')
-#         break
-#     if cnt==70:
-#         print("Yours Points = ",cnt)
-#         print('You Win, Great Play')
-#         break
+while 1:
+    r=int(input("Enter first index: "))
+    c=int(input("Enter second index: "))
+    print('\n')
+    cnt=cnt+1
+    modifysl(r,c)
+    printboard(sl)
+    if sl[r][c]=='M':
+        print("Your Points = ",cnt)
+        print('You Lose, Better luck next time')
+        break
+    if cnt==70:
+        print("Yours Points = ",cnt)
+        print('You Win, Great Play')
+        break
 printboard(rl)
-
 
 
