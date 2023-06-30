@@ -1,5 +1,3 @@
-#  By Tushar Puniya
-
 import random as r
 
 def printboard(l):                              #  Function to print the board
